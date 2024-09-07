@@ -15,12 +15,21 @@ def get_billboard_data(date):
 	soup = BeautifulSoup(response.content, 'html.parser')
 	chart_data = []
 
-	#Find all the songs on the chart
 	chart_entries = soup.find_all('li', class_='o-chart-results-list__item')
+
 	for entry in chart_entries:
-		rank = entry.find('span', class_='c-label').text.strip() if entry.find('span', class_='c-label') else ('N/A')
-		title = entry.find('h3', class_='c-title').text.strip() if entry.find('h3', class_='c-title') else ('N/A')
-		artist = entry.find('span', class_='c-label').text.strip() if entry.find('span', class_='c-label') else ('N/A')
+		rank_element = entry.find('span', class_='c-label')
+		print(rank_element.prettyfy())
+		rank = rank_element.strip() if entry.find('span', class_='c-label') else 'N/A'
+		title_element = entry.find('h3', class_='c-title')
+		title = title_element.text.strip() if title_element else 'N/A'
+		artist_element = entry.find('span', class_='c-label')
+		artist = artist_element.text.strip() if artist_element else 'N/A'
+
+		chart_data.append([rank, title, artist])
+	
+	return chart_data
+
 
 def scrape_billboard_data(start_date, end_date, output_file):
 	"""Scrape Billboard Hot 100 data from start_date to end_date and write to Excel"""
