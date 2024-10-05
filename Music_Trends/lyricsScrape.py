@@ -30,10 +30,10 @@ def fetch_lyrics_from_url(url):
         return None
 
 # Define the file paths
-file_path = 'charts_unique_items.xlsx'  # Original file
+file_path = 'Song_Lyrics_URL_Complete.xlsx'  # Original file
 output_directory = os.path.dirname(file_path)  # Get the directory of the input file
-partial_save_path = os.path.join(output_directory, 'Song_Test_Lyrics.xlsx')  # Partial save path
-output_file = os.path.join(output_directory, 'songs_test_lyrics_scrape_partial.xlsx')  # Final output file
+partial_save_path = os.path.join(output_directory, 'Song_Lyrics_URL_Complete_partial.xlsx')  # Partial save path
+output_file = os.path.join(output_directory, 'songs_lyrics_url_&_scrape_com_.xlsx')  # Final output file
 
 # Check if the partial save file exists
 if os.path.exists(partial_save_path):
