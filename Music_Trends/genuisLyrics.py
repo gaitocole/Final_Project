@@ -93,10 +93,10 @@ def get_lyrics(song_title, artist=None, max_retries=3):
     return None
 
 # Define the file paths
-file_path = 'charts_unique_items.xlsx'  # Original file
+file_path = 'hot-100-current-to-present.xlsx'  # Original file
 output_directory = os.path.dirname(file_path)  # Get the directory of the input file
-partial_save_path = os.path.join(output_directory, 'songs_with_lyrics_partial_unique_items.xlsx')  # Partial save path
-output_file = os.path.join(output_directory, 'songs_with_lyrics_unique_items.xlsx')  # Final output file
+partial_save_path = os.path.join(output_directory, 'hot-100-current-to-present_partial_unique_items.xlsx')  # Partial save path
+output_file = os.path.join(output_directory, 'hot-100-current-to-present_unique_items.xlsx')  # Final output file
 
 # Check if the partial save file exists
 if os.path.exists(partial_save_path):
