@@ -1,3 +1,9 @@
 *.xlsx filter=lfs diff=lfs merge=lfs -text
 Music_Trends/*.xlsx filter=lfs diff=lfs merge=lfs -text
 Music_Trends/charts.xlsx filter=lfs diff=lfs merge=lfs -text
+Space_Data_Mining/DataMiningAsteroids.ipynb filter=lfs diff=lfs merge=lfs -text
+Space_Data_Mining/ESA-Mission1 filter=lfs diff=lfs merge=lfs -text
+Space_Data_Mining/ESA-Mission2 filter=lfs diff=lfs merge=lfs -text
+Space_Data_Mining/ESA-Mission3 filter=lfs diff=lfs merge=lfs -text
+Space_Data_Mining/README.md filter=lfs diff=lfs merge=lfs -text
+Space_Data_Mining/testfile.txt filter=lfs diff=lfs merge=lfs -text
