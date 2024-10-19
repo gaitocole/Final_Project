@@ -3,6 +3,13 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import pandas as pd
 import json
 from openpyxl import load_workbook
+import time
+import logging
+from spotipy.exceptions import SpotifyException, SpotifyException
+import requests
+
+# Set up logging
+logging.basicConfig(filename='spotify_metadata.log', level=logging.INFO)
 
 # Load the Spotify credentials from config.json
 with open('config.json') as config_file:
@@ -13,7 +20,7 @@ client_secret = config['spotify']['client_secret']
 
 # Set up Spotify credentials
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
-sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager, requests_timeout=10)
 
 # Load your song dataset (use pd.read_excel to load as a DataFrame)
 df = pd.read_excel('Unique_Songs_Lyrics_Spotify.xlsx')
@@ -30,7 +37,12 @@ df['Total Tracks in Album'] = None
 
 # Function to fetch metadata from Spotify
 def fetch_metadata(row):
+    if pd.isnull(row['Title']) or pd.isnull(row['Artist']):
+        logging.warning(f"Skipping row due to missing Title or Artist: {row}")
+        return row
+
     try:
+        logging.info(f"Fetching metadata for {row['Title']} by {row['Artist']}")
         # Search for the track by title and artist
         result = sp.search(q=f'track:{row["Title"]} artist:{row["Artist"]}', type='track')
         if result['tracks']['items']:
@@ -49,10 +61,22 @@ def fetch_metadata(row):
             artist = sp.artist(artist_id)
             row['Artist Popularity'] = artist['popularity']
             row['Artist Genres'] = ', '.join(artist['genres'])
-        
+
+        return row
+    except SpotifyException as e:
+        if e.http_status == 429:  # Rate limit exceeded
+            retry_after = int(e.headers.get('Retry-After', 10))  # default to 10 seconds
+            print(f"Rate limit exceeded. Retrying in {retry_after} seconds...")
+            time.sleep(retry_after)
+            return fetch_metadata(row)
+        else:
+            logging.error(f"Error fetching data for {row['Title']} by {row['Artist']}: {e}")
+            return row
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Network or API error for {row['Title']} by {row['Artist']}: {e}")
         return row
     except Exception as e:
-        print(f"Error fetching data for {row['Title']} by {row['Artist']}: {e}")
+        logging.error(f"Error fetching data for {row['Title']} by {row['Artist']}: {e}")
         return row
 
 # Function to save DataFrame to Excel
@@ -65,7 +89,7 @@ def save_to_excel(data, filename):
         # If the file does not exist, create it
         data.to_excel(filename, sheet_name='Sheet1', index=False)
 
-# Main function to fetch metadata for all songs and save to Excel
+# Main function to fetch metadata for all songs and save to Excel, with resume functionality
 def fetch_all_metadata(df, filename):
     try:
         # Load the existing file to find how many rows have already been processed
