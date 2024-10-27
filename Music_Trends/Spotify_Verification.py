@@ -6,8 +6,8 @@ import spotipy
 with open('config.json', 'r') as config_file:
     config = json.load(config_file)
 
-client_id = config['spotify']['client_id']
-client_secret = config['spotify']['client_secret']
+client_id = config['spotify']['client_id_5']
+client_secret = config['spotify']['client_secret_5']
 
 # Check if credentials are loaded correctly
 if not client_id or not client_secret:

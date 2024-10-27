@@ -11,14 +11,14 @@ import requests
 logging.basicConfig(filename='spotify_metadata.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Set the filename for reading and writing the Excel file
-FILENAME = 'Lyrics_genre_Determination_Reverse.xlsx'
+FILENAME = 'Lyrics_genre_Determination.xlsx'
 
 # Load the Spotify credentials from config.json
 with open('config.json') as config_file:
     config = json.load(config_file)
 
-client_id = config['spotify']['client_id_1']
-client_secret = config['spotify']['client_secret_1']
+client_id = config['spotify']['client_id_4']
+client_secret = config['spotify']['client_secret_4']
 
 # Set up Spotify credentials
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
