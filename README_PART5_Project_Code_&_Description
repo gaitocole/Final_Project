@@ -2,11 +2,11 @@ Project Title: Music Words Slap
 Team Members: None
 	-Cole Gaito
 Description of the Project:
-This project seeks to utilize a kaggle dataset to aggrigate the Billboard Top 100 songs, then get the Lyrics from Genuis and Metadata from Spotify to determine if you can predict from Lyrics alone the longivity and popularity of a future lyric set.
+This project seeks to utilize a kaggle dataset to aggregate the Billboard Top 100 songs, then get the Lyrics from Genuis and Metadata from Spotify to determine if you can predict from Lyrics alone the longevity and popularity of a future lyric set.
 
 Summary of the questions(s) sought and the answers:
 1. Can lyrics predict Billboard chart success? 
-	– Yes, though with accuracy is limited to a range of +/-19% on the inital RNN creation.
+	– Yes, though with accuracy is limited to a range of +/-19% on the initial RNN creation.
 
 2. Are thematic correlations evident among top hits? 
 	– Yes, love is the highest scoring non-trivial word.
@@ -17,5 +17,6 @@ Summary of the questions(s) sought and the answers:
 Application of this knowledge:
 The application of the knowledge rests in the ability for record companies to make a predictive guess based on previous hits the future hits of hot one-hundred chart list.
 In addition there is a huge monetary incentive if a hit is correctly predicted and in an avoidance of cost if a non-hit song can be avoided.
-Link to the video demonstration: https://youtu.be/KyqpACFpE2E
+Link to the video demonstration: https://youtu.be/ein_jP4ru-Q
 Link to your final project paper:https: //github.com/gaitocole/Final_Project/tree/main
+Link to general GitHub Location: https://github.com/gaitocole/Final_Project
